@@ -3,3 +3,4 @@
 ## Ссылки
 
 1. [Telegram Bot Java Library](https://github.com/rubenlagus/TelegramBots)
+2. [Telegram-бот на Java для самых маленьких — от старта до бесплатного размещения на heroku](https://habr.com/ru/post/528694/)
