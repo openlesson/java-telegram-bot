@@ -1,9 +1,5 @@
 package org.itstep;
 
-import java.io.IOException;
-
-import org.eclipse.collections.impl.multimap.set.SynchronizedSetMultimap;
-import org.itstep.bot.EchoBot;
 import org.itstep.bot.WeatherBot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
