@@ -14,8 +14,7 @@ public class App {
         logger.info("Start bot");
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-            //botsApi.registerBot(new EchoBot());
-            botsApi.registerBot(new WeatherBot( System.getenv("BOT_TOKEN"), System.getenv("BOT_NAME")));
+            botsApi.registerBot(new WeatherBot( Config.getBotToken(), Config.getBotName()));
         } catch (TelegramApiException e) {
             logger.error(e.getLocalizedMessage(), e);
         }
