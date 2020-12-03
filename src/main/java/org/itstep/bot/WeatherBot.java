@@ -8,20 +8,28 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.abilitybots.api.bot.AbilityBot;
 import org.telegram.abilitybots.api.objects.Ability;
+import org.telegram.abilitybots.api.objects.Privacy;
+import org.telegram.abilitybots.api.objects.Reply;
+import org.telegram.abilitybots.api.objects.ReplyFlow;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Location;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
-import static org.telegram.abilitybots.api.objects.Locality.ALL;
-import static org.telegram.abilitybots.api.objects.Locality.USER;
+import static org.telegram.abilitybots.api.objects.Locality.*;
 import static org.telegram.abilitybots.api.objects.Privacy.ADMIN;
 import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
+import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
 
 public class WeatherBot extends AbilityBot {
 
@@ -32,6 +40,33 @@ public class WeatherBot extends AbilityBot {
     public WeatherBot(String botToken, String botUsername) {
         super(botToken, botUsername);
         openWeatherMap = new OpenWeatherMap(System.getenv("OPEN_WEATHER_MAP_API"));
+    }
+
+//    public Reply sayYuckOnImage() {
+//        // getChatId is a public utility function in rg.telegram.abilitybots.api.util.AbilityUtils
+//        Consumer<Update> action = upd -> silent.send("You said hi", getChatId(upd));
+//
+//        Reply replyHi = Reply.of(action, u -> u.hasMessage() && u.getMessage().getText().equalsIgnoreCase("hi"));
+//        Reply replyHello = Reply.of(update -> silent.send("You said hello", getChatId(update)),
+//                update -> update.hasMessage() && update.getMessage().getText().equalsIgnoreCase("hello"));
+//        return ReplyFlow.builder(db)
+//                .next(replyHi)
+//                .next(replyHello)
+//                .build();
+//    }
+
+    public Ability usersCommand() {
+        return Ability
+                .builder()
+                .name("users")
+                .privacy(Privacy.CREATOR)
+                .locality(ALL)
+                .input(0)
+                .action(messageContext -> {
+                    String msg = users().values().stream().map(User::getFirstName).collect(Collectors.joining(", "));
+                    silent.send(msg, getChatId(messageContext.update()));
+                })
+                .build();
     }
 
     public Ability sayHelloWorld() {
