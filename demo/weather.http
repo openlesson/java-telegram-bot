@@ -1,0 +1,2 @@
+### current weahter for Dnipro
+GET api.openweathermap.org/data/2.5/weather?lat=48.4264306&lon=34.9580993&appid={api}

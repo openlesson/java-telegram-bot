@@ -1,17 +1,15 @@
 package org.itstep.bot;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.Properties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage.SendMessageBuilder;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.io.IOException;
+import java.util.Properties;
 
 public class EchoBot extends TelegramLongPollingBot {
 
@@ -55,3 +53,5 @@ public class EchoBot extends TelegramLongPollingBot {
     }
 
 }
+
+
