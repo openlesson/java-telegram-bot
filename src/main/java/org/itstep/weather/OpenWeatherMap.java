@@ -26,7 +26,7 @@ public class OpenWeatherMap {
 
     public OpenWeatherMap(String apiKey) {
         this.loadingCache = CacheBuilder.newBuilder()
-                .expireAfterWrite(Duration.ofDays(1))
+                .expireAfterWrite(Duration.ofHours(1))
                 .build(new LoadWeather(apiKey));
     }
 
